@@ -1,0 +1,36 @@
+.header{
+    position: fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgb(139, 75, 16);
+    height: 55px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.left{
+    display: flex;
+    align-items: center;
+}
+.right{
+    display: flex;
+    align-items: center;
+}
+.hangmanTitle{
+    color: white;
+    font-size: 30px;
+    white-space:nowrap;
+}
+.githubIcon{
+    font-size:36px;
+    margin-left:10px; 
+    margin-right: 10px; 
+    color:rgb(255, 255, 255);
+}
+.githubIcon:hover{
+    color: #000;
+    transition: 0.1s;
+}
