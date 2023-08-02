@@ -1,7 +1,7 @@
 {
   "name": "hangman",
   "version": "0.1.0",
-  "homepage": "https://alexusljf.github.io/hangman",
+  "homepage": "https://alexusljf.github.io/Hangman/",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.4.0",
