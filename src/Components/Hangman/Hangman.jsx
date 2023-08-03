@@ -108,6 +108,7 @@ const Hangman = () => {
     document.querySelector(".retryButton").style.display = "block";   
     document.querySelector(".definition").style.display = "block";
     document.querySelector(".endGame").scrollIntoView();
+    document.querySelector(".inputDiv").style.display = "none";     
 
   }
 
