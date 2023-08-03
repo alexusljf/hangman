@@ -32,6 +32,10 @@ const Hangman = () => {
         setWord(randomWord);
         setWordState(Array(randomWord.length).fill('_'));
         console.log(randomWord);
+
+        const definitionResponse = await fetch ("https://api.api-ninjas.com/v1/dictionary?word="+randomWord);
+        const definitionData = await definitionResponse.json();
+        console.log(definitionData);
     }
   }
 
@@ -133,6 +137,9 @@ const Hangman = () => {
         </div>
         <div className='wordReveal'>
           The word was: "{word}" <br/>
+        </div>
+        <div className='definition'>
+          placeholder definition
         </div>
         <button onClick = {refreshPage} className='retryButton'> Play Again? </button>
       </div>
