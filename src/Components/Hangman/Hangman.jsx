@@ -22,20 +22,21 @@ const Hangman = () => {
   useEffect(() => { retrieveWord(); }, []);
 
   async function retrieveWord() {
-    const response = await fetch("https://random-word-api.herokuapp.com/word");
+    const response = await fetch("https://random-words-api.vercel.app/word/");
     if(response.status === 400){
         console.log("Error while retrieving word from API.")
     }
     else{
         const data = await response.json();
-        const randomWord = data[0];
+        const randomWord = data[0].word.toLowerCase();
+        const definition = data[0].definition;
         setWord(randomWord);
         setWordState(Array(randomWord.length).fill('_'));
         console.log(randomWord);
+        console.log(definition);
+        // use Template Literals to include variables into a string
+        document.querySelector(".definition").innerHTML = `Definition: ${definition}`;
 
-        const definitionResponse = await fetch ("https://api.api-ninjas.com/v1/dictionary?word="+randomWord);
-        const definitionData = await definitionResponse.json();
-        console.log(definitionData);
     }
   }
 
@@ -105,6 +106,9 @@ const Hangman = () => {
     document.querySelector(".resultText").style.display = "block";     
     document.querySelector(".wordReveal").style.display = "block";   
     document.querySelector(".retryButton").style.display = "block";   
+    document.querySelector(".definition").style.display = "block";
+    document.querySelector(".endGame").scrollIntoView();
+
   }
 
   return (

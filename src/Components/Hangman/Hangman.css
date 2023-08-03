@@ -15,9 +15,10 @@
     flex: 1;
 }
 .inputBar{
-    width: 140px;
-    font-size: 16px;
+    width: 160px;
+    font-size: 20px;
     padding-left: 10px;
+    padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
     border: 1px black;
@@ -54,10 +55,11 @@
     margin-top: 20px;
     flex-direction: column;
     gap: 20px;
-
 }
-
-.resultText, .wordReveal, .retryButton{
+.hangmanDrawingDiv{
+    margin: auto;
+}
+.resultText, .wordReveal, .retryButton, .definition{
     display: inline;
     display: none;
 }
@@ -68,3 +70,15 @@
 }
 .resultText{
 }
+@media screen and (max-width: 600px) {
+    .hangmanDrawingDiv{
+        scale: 0.7;
+        margin-top: -5vh;
+        margin-bottom: -5vh;
+    }
+    .endGame{
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+    }
+  }
