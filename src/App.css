@@ -3,4 +3,26 @@
   text-align: center;
   min-height: 100vh;
   font-family: 'Rubik', sans-serif;
+  background-color: rgba(117, 150, 201, 0.329);
 }
+
+
+body { 
+  background: repeating-linear-gradient(90deg, rgba(39,175,238,1) 0%, rgba(72,77,235,1) 50%, rgba(150,60,231,1) 100%);
+  background-size: 400% 400%;
+  animation: gradient 15s ease-in forwards infinite alternate;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0%;
+  }
+  50% {
+    background-position: 50%;
+  }
+  100% {
+    background-position: 100%;
+  }
+}
+

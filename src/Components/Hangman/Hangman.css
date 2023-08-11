@@ -4,7 +4,16 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
+}
+.mistakesDiv, .guessedDiv{
+    line-height: 1.6;
+    border: 1px solid black;
+    border-radius: 14px;
+    margin: auto;
+    padding: 14px;
+    background-color: #ffffffc7;
+    margin-top: -15px;
 }
 .inputDiv{
     margin-top: 20px;
@@ -15,25 +24,26 @@
     flex: 1;
 }
 .inputBar{
-    width: 160px;
+    width: 165px;
     font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
     padding-top: 5px;
     padding-bottom: 5px;
-    border: 1px black;
-    border-style: solid;
+    border: 1px solid black;
     border-radius: 14px;
 }
 .inputBar::placeholder{
     font-family: 'Rubik', sans-serif;
 }
+.inputBar:focus{
+    outline: none;
+}
 .guessButton, .retryButton{
     cursor: pointer;
     font-size: 20px;
-    background-color: rgb(139, 75, 16);
+    background-color: black;
     color: rgb(255, 255, 255);
-    border-style: solid;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 5px;
@@ -41,18 +51,18 @@
     border-radius: 12px;
     font-family: 'Rubik', sans-serif;
     transition: 0.2s;
-    text-decoration: none;
+    border: none;
 }
 .guessButton:hover, .retryButton:hover{
-    color: rgb(255, 255, 255);
-    background-color: rgb(0, 0, 0);
+    background-color: rgb(44, 51, 116);
     transition: 0.1s;
+    border: none;
 }
 .endGame{
     margin: auto;
     padding: 20px;
     display: inline-flex;
-    margin-top: 20px;
+    margin-top: 5px;
     flex-direction: column;
     gap: 20px;
 }
@@ -65,10 +75,6 @@
 }
 .retryButton{
     margin: auto;
-}
-.wordReveal{
-}
-.resultText{
 }
 @media screen and (max-width: 600px) {
     .hangmanDrawingDiv{

@@ -1,23 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import './Hangman.css'
-import image0 from './images/0.png';
-import image1 from './images/1.png';
-import image2 from './images/2.png';
-import image3 from './images/3.png';
-import image4 from './images/4.png';
-import image5 from './images/5.png';
-import image6 from './images/6.png';
-import image7 from './images/7.png';
+import React, { useState, useEffect } from "react";
+import "./Hangman.css"
+import image0 from "./images/0.png";
+import image1 from "./images/1.png";
+import image2 from "./images/2.png";
+import image3 from "./images/3.png";
+import image4 from "./images/4.png";
+import image5 from "./images/5.png";
+import image6 from "./images/6.png";
+import image7 from "./images/7.png";
+import winMP3 from "./win.mp3";
+import loseMP3 from "./lose.mp3";
 
 const Hangman = () => {
   let mistakesMax = 7;
   // use a state to store letters which have already been guessed
   const [guessedLetters, setGuessLetters] = useState([]);
-  const [word, setWord] = useState('');
+  const [word, setWord] = useState("");
   const [currentMistakes, setCurrentMistakes] = useState(0);
   // wordState is used for our array of underscores
   const [wordState, setWordState] = useState([]);
-  const [guess, setGuess] = useState('');
+  const [guess, setGuess] = useState("");
   // use empty dependecy array [], such that useEffect is only called once.
   useEffect(() => { retrieveWord(); }, []);
 
@@ -31,13 +33,23 @@ const Hangman = () => {
         const randomWord = data[0].word.toLowerCase();
         const definition = data[0].definition;
         setWord(randomWord);
-        setWordState(Array(randomWord.length).fill('_'));
+        setWordState(Array(randomWord.length).fill("_"));
         console.log(randomWord);
         console.log(definition);
         // use Template Literals to include variables into a string
         document.querySelector(".definition").innerHTML = `Definition: ${definition}`;
-
     }
+  }
+
+  const winAudioPlay = () => {
+    const winAudio = new Audio(winMP3);
+    winAudio.volume = 0.1;
+    winAudio.play();
+  }
+  const loseAudioPlay = () => {
+    const loseAudio = new Audio(loseMP3);
+    loseAudio.volume = 0.1;
+    loseAudio.play();
   }
 
   const imagesArray = [
@@ -56,7 +68,7 @@ const Hangman = () => {
   
     if (!isLetter) {
       console.log("Invalid input. Please enter an alphabet.");
-      setGuess('');
+      setGuess("");
       return;
     }
   
@@ -72,9 +84,10 @@ const Hangman = () => {
         setWordState(updatedWordState);
         console.log(updatedWordState);
   
-        if (!updatedWordState.includes('_')) {
+        if (!updatedWordState.includes("_")) {
           console.log("You Win!");
           displayResult("You Won! :)");
+          winAudioPlay();
           return;
         }
       } else {
@@ -84,9 +97,10 @@ const Hangman = () => {
       if (currentMistakes >= mistakesMax-1) {
         console.log("You Lose!");
         displayResult("Game Over!");
+        loseAudioPlay();
       }
     }
-    setGuess('');
+    setGuess("");
   }
   
   // Allows use of Enter key instead of clicking on Guess Button
@@ -102,6 +116,7 @@ const Hangman = () => {
   const displayResult = (message) => {
     document.querySelector(".endGame").style.border = "1px solid black";
     document.querySelector(".endGame").style.borderRadius = "14px";
+    document.querySelector(".endGame").style.backgroundColor  = "#ffffffc7";
     document.querySelector(".resultText").innerHTML = message;  
     document.querySelector(".resultText").style.display = "block";     
     document.querySelector(".wordReveal").style.display = "block";   
@@ -109,44 +124,36 @@ const Hangman = () => {
     document.querySelector(".definition").style.display = "block";
     document.querySelector(".endGame").scrollIntoView();
     document.querySelector(".inputDiv").style.display = "none";     
-
   }
 
   return (
     <div className = "gameContainer">
-        <div>
-            Current Mistakes : {currentMistakes} <br/>
-        </div>
-        <div>
-          (7 Mistakes = Lose)
-        </div>
-        
-      {/* Add Hangman drawing here */}
-        <div className='hangmanDrawingDiv'>
-          <img src = {image0} alt = "placeholder img" className='hangmanDrawing'/>
-        </div>
-        <div>
-            Guessed Letters : {guessedLetters.join(' ')}
-        </div>
-        <div>
-            Word : {wordState.join(' ')}
-        </div>
-      <div className='inputDiv'>
-        <input type="text" value={guess}  onChange={(e) => setGuess(e.target.value)} maxLength={1} placeholder='Enter Guess Here' className='inputBar' onKeyDown ={handleKeyDown}/>
-        <button onClick={handleGuess} className='guessButton'>Guess</button>
+      <div className = "mistakesDiv">
+        Current Mistakes : {currentMistakes} <br/>
+        (7 Mistakes = Lose)
       </div>
-      
-      <div className='endGame'>
-        <div className='resultText'>
+      <div className="hangmanDrawingDiv">
+        <img src = {image0} alt = "placeholder img" className="hangmanDrawing"/>
+      </div>
+      <div className = "guessedDiv">
+          Guessed Letters : {guessedLetters.join(" ")} <br/>
+          Word : {wordState.join(" ")}
+      </div>
+      <div className="inputDiv">
+        <input type="text" value={guess}  onChange={(e) => setGuess(e.target.value)} maxLength={1} placeholder="Enter Guess Here" className="inputBar" onKeyDown ={handleKeyDown}/>
+        <button onClick={handleGuess} className="guessButton">Guess</button>
+      </div>
+      <div className="endGame">
+        <div className="resultText">
           placeholder result
         </div>
-        <div className='wordReveal'>
+        <div className="wordReveal">
           The word was: "{word}" <br/>
         </div>
-        <div className='definition'>
+        <div className="definition">
           placeholder definition
         </div>
-        <button onClick = {refreshPage} className='retryButton'> Play Again? </button>
+        <button onClick = {refreshPage} className="retryButton"> Play Again? </button>
       </div>
       
     </div>
