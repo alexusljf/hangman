@@ -68,6 +68,7 @@
 }
 .hangmanDrawingDiv{
     margin: auto;
+    z-index: 2;
 }
 .resultText, .wordReveal, .retryButton, .definition{
     display: inline;

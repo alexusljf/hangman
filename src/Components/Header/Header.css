@@ -9,6 +9,7 @@
     height: 55px;
     padding-left: 30px;
     padding-right: 30px;
+    z-index: 1;
 }
 .left{
     display: flex;
@@ -33,7 +34,6 @@
 }
 @media (max-width: 430px){
     .header{
-        background-color: rgb(44, 51, 116);
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -45,5 +45,8 @@
     }
     .githubIcon:hover{
         color: black;
+    }
+    .hangmanTitle{
+        display: none;
     }
 }
