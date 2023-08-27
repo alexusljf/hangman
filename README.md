@@ -1,7 +1,14 @@
-Hangman Game made with React. 
+# Hangman
 
-Uses a random word API to fetch random words that will be used for the game.
+Welcome to my Hangman Game! <br>
+This game uses a random word API to fetch random words each round, enhancing replayability.<br>
+Players only have 7 wrong tries before the game ends.
 
-API Used: https://github.com/mcnaveen/Random-Words-API
+## Tools Used
+
+* Random Word API: https://github.com/mcnaveen/Random-Words-API
+* React
+* CSS
+* GitHub Pages
 
 Hangman images were drawn in Paint :)
