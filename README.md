@@ -12,3 +12,8 @@ Players only have 7 wrong tries before the game ends.
 * GitHub Pages
 
 Hangman images were drawn in Paint :)
+
+## To-Do
+
+- [] Add Difficulty Options (Customise Number of Tries)
+- [] Add a pop-up message for incorrect input
