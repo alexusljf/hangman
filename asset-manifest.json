@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Hangman/static/css/main.aeb9615d.css",
-    "main.js": "/Hangman/static/js/main.5b02f9f7.js",
+    "main.css": "/Hangman/static/css/main.7f8e2a84.css",
+    "main.js": "/Hangman/static/js/main.7e8f1c72.js",
     "static/js/787.20ace30e.chunk.js": "/Hangman/static/js/787.20ace30e.chunk.js",
     "static/media/lose.mp3": "/Hangman/static/media/lose.c365ab0cd66a93e85ce3.mp3",
     "static/media/win.mp3": "/Hangman/static/media/win.6d37cbf26865c4ab656b.mp3",
     "index.html": "/Hangman/index.html",
-    "main.aeb9615d.css.map": "/Hangman/static/css/main.aeb9615d.css.map",
-    "main.5b02f9f7.js.map": "/Hangman/static/js/main.5b02f9f7.js.map",
+    "main.7f8e2a84.css.map": "/Hangman/static/css/main.7f8e2a84.css.map",
+    "main.7e8f1c72.js.map": "/Hangman/static/js/main.7e8f1c72.js.map",
     "787.20ace30e.chunk.js.map": "/Hangman/static/js/787.20ace30e.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.aeb9615d.css",
-    "static/js/main.5b02f9f7.js"
+    "static/css/main.7f8e2a84.css",
+    "static/js/main.7e8f1c72.js"
   ]
 }
