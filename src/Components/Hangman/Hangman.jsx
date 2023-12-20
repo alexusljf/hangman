@@ -10,6 +10,7 @@ import image6 from "./images/6.png";
 import image7 from "./images/7.png";
 import winMP3 from "./win.mp3";
 import loseMP3 from "./lose.mp3";
+import Popup from "./Popup";
 
 const Hangman = () => {
   let mistakesMax = 7;
@@ -20,27 +21,34 @@ const Hangman = () => {
   // wordState is used for our array of underscores
   const [wordState, setWordState] = useState([]);
   const [guess, setGuess] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
   // use empty dependecy array [], such that useEffect is only called once.
-  useEffect(() => { retrieveWord(); }, []);
+  useEffect(() => { retrieveWordAndDefinition(); }, []);
 
-  async function retrieveWord() {
-    const response = await fetch("https://random-words-api.vercel.app/word/");
-    if(response.status === 400){
-        console.log("Error while retrieving word from API.")
-    }
-    else{
-        const data = await response.json();
-        const randomWord = data[0].word.toLowerCase();
-        const definition = data[0].definition;
-        setWord(randomWord);
-        setWordState(Array(randomWord.length).fill("_"));
-        console.log(randomWord);
+  async function retrieveWordAndDefinition() {
+    const response = await fetch("https://random-word-api.herokuapp.com/word");
+    if (response.status === 400) {
+      console.log("Error while retrieving word from API.");
+    } else {
+      const data = await response.json();
+      const randomWord = data[0].toLowerCase();
+      console.log(randomWord);
+      setWord(randomWord);
+      setWordState(Array(randomWord.length).fill("_"));
+      // Fetch definition after setting the word
+      const dictResponse = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${randomWord}`);
+      const dictData = await dictResponse.json();
+      if(dictData.title === "No Definitions Found") {
+        console.log(dictData.title);
+        document.querySelector(".definition").innerHTML = `Definition: ${dictData.title}`;
+      }
+      else{
+        const definition = dictData[0].meanings[0].definitions[0].definition;
         console.log(definition);
-        // use Template Literals to include variables into a string
         document.querySelector(".definition").innerHTML = `Definition: ${definition}`;
+      }
     }
   }
-
   const winAudioPlay = () => {
     const winAudio = new Audio(winMP3);
     winAudio.volume = 0.1;
@@ -51,7 +59,12 @@ const Hangman = () => {
     loseAudio.volume = 0.1;
     loseAudio.play();
   }
-
+  const handleInvalidInput = () =>{
+    console.log("invalid input, pop up should appear");
+    setShowPopup(true);
+    setGuess("");
+    return;
+  }
   const imagesArray = [
     image0,
     image1,
@@ -67,11 +80,10 @@ const Hangman = () => {
     const isLetter = /^[a-zA-Z]$/.test(guess);
   
     if (!isLetter) {
-      console.log("Invalid input. Please enter an alphabet.");
-      setGuess("");
+      handleInvalidInput();
       return;
     }
-  
+    setShowPopup(false);
     if (!guessedLetters.includes(guess)) {
       guessedLetters.push(guess);
       setGuessLetters(guessedLetters);
@@ -86,7 +98,7 @@ const Hangman = () => {
   
         if (!updatedWordState.includes("_")) {
           console.log("You Win!");
-          displayResult("You Won! :)");
+          displayResult("You Win! :)");
           winAudioPlay();
           return;
         }
@@ -140,6 +152,7 @@ const Hangman = () => {
           Word : {wordState.join(" ")}
       </div>
       <div className="inputDiv">
+        {showPopup && <Popup message="Invalid input. Please enter an alphabet." />}
         <input type="text" value={guess}  onChange={(e) => setGuess(e.target.value)} maxLength={1} placeholder="Enter Guess Here" className="inputBar" onKeyDown ={handleKeyDown}/>
         <button onClick={handleGuess} className="guessButton">Guess</button>
       </div>

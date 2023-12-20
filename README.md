@@ -6,7 +6,8 @@ Players only have 7 wrong tries before the game ends.
 
 ## Tools Used
 
-* Random Word API: https://github.com/mcnaveen/Random-Words-API
+* Random Word API: https://random-word-api.herokuapp.com/home
+* Dictionary API: https://dictionaryapi.dev/
 * React
 * CSS
 * GitHub Pages
@@ -16,4 +17,6 @@ Hangman images were drawn in Paint :)
 ## To-Do
 
 - [] Add Difficulty Options (Customise Number of Tries)
+- [x] Change API (Old one died)
+- [] Change CSS to SCSS
 - [] Add a pop-up message for incorrect input
