@@ -19,4 +19,4 @@ Hangman images were drawn in Paint :)
 - [] Add Difficulty Options (Customise Number of Tries)
 - [x] Change API (Old one died)
 - [] Change CSS to SCSS
-- [] Add a pop-up message for incorrect input
+- [x] Add a pop-up message for incorrect input

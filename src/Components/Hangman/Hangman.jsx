@@ -65,6 +65,20 @@ const Hangman = () => {
     setGuess("");
     return;
   }
+  // Close popup when user clicks outside of it
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target.closest('.inputBar')) return;
+      setShowPopup(false);
+    };
+
+    document.body.addEventListener('click', handleOutsideClick);
+
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClick);
+    };
+  }, []);
+
   const imagesArray = [
     image0,
     image1,

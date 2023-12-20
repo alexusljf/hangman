@@ -20,13 +20,13 @@
     align-items: center;
 }
 .hangmanTitle{
-    color: black;
+    color: white;
     font-size: 30px;
     white-space:nowrap;
 }
 .githubIcon{
     font-size:36px;
-    color:black;
+    color:white;
 }
 .githubIcon:hover{
     color: rgb(44, 51, 116);
