@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 .App {
   text-align: center;
   min-height: 100vh;
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: rgba(117, 150, 201, 0.329);
 }
 

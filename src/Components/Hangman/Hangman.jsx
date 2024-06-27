@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Hangman.css"
 import image0 from "./images/0.png";
 import image1 from "./images/1.png";
@@ -22,17 +22,39 @@ const Hangman = () => {
   const [wordState, setWordState] = useState([]);
   const [guess, setGuess] = useState("");
   const [showPopup, setShowPopup] = useState(false);
-  // use empty dependecy array [], such that useEffect is only called once.
+  const [category, setCategory] = useState("");
+
+  const inputDivRef = useRef(null);
+
   useEffect(() => { retrieveWordAndDefinition(); }, []);
+  useEffect(() => {
+    console.log("showPopup state changed: ", showPopup);
+  }, [showPopup]);
 
   async function retrieveWordAndDefinition() {
-    const response = await fetch("https://random-word-api.herokuapp.com/word");
+    const roll = Math.floor(Math.random() * 3);
+    let url;
+    switch(roll){
+      case 0:
+        url = "https://random-word-form.herokuapp.com/random/noun";
+        setCategory('nouns');
+        break;
+      case 1:
+        url = "https://random-word-form.herokuapp.com/random/adjective";
+        setCategory('adjectives');
+        break;
+      default:
+        url = "https://random-word-form.herokuapp.com/random/animal;";
+        setCategory('animals');
+        break;
+    }
+    const response = await fetch(url);
     if (response.status === 400) {
       console.log("Error while retrieving word from API.");
     } else {
       const data = await response.json();
       const randomWord = data[0].toLowerCase();
-      console.log(randomWord);
+      console.log(category, randomWord);
       setWord(randomWord);
       setWordState(Array(randomWord.length).fill("_"));
       // Fetch definition after setting the word
@@ -49,36 +71,40 @@ const Hangman = () => {
       }
     }
   }
+
   const winAudioPlay = () => {
     const winAudio = new Audio(winMP3);
     winAudio.volume = 0.1;
     winAudio.play();
   }
+
   const loseAudioPlay = () => {
     const loseAudio = new Audio(loseMP3);
     loseAudio.volume = 0.1;
     loseAudio.play();
   }
+
   const handleInvalidInput = () =>{
     console.log("invalid input, pop up should appear");
     setShowPopup(true);
     setGuess("");
     return;
   }
+
   // Close popup when user clicks outside of it
   useEffect(() => {
     const handleOutsideClick = (event) => {
-      if (event.target.closest('.inputBar')) return;
-      setShowPopup(false);
+      if (inputDivRef.current && !inputDivRef.current.contains(event.target)) {
+        setShowPopup(false);
+      }
     };
-
     document.body.addEventListener('click', handleOutsideClick);
 
     return () => {
       document.body.removeEventListener('click', handleOutsideClick);
     };
   }, []);
-
+  
   const imagesArray = [
     image0,
     image1,
@@ -90,7 +116,7 @@ const Hangman = () => {
     image7
   ]
 
-  function handleGuess() {
+  function handleGuess() {  
     const isLetter = /^[a-zA-Z]$/.test(guess);
   
     if (!isLetter) {
@@ -163,9 +189,10 @@ const Hangman = () => {
       </div>
       <div className = "guessedDiv">
           Guessed Letters : {guessedLetters.join(" ")} <br/>
+          Hint: Category is {category} <br/>
           Word : {wordState.join(" ")}
       </div>
-      <div className="inputDiv">
+      <div className="inputDiv" ref={inputDivRef}>
         {showPopup && <Popup message="Invalid input. Please enter an alphabet." />}
         <input type="text" value={guess}  onChange={(e) => setGuess(e.target.value)} maxLength={1} placeholder="Enter Guess Here" className="inputBar" onKeyDown ={handleKeyDown}/>
         <button onClick={handleGuess} className="guessButton">Guess</button>
