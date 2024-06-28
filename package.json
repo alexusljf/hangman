@@ -1,6 +1,6 @@
 {
   "name": "hangman",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "homepage": "https://alexusljf.github.io/Hangman/",
   "private": true,
   "dependencies": {

@@ -44,7 +44,7 @@ const Hangman = () => {
         setCategory('adjectives');
         break;
       default:
-        url = "https://random-word-form.herokuapp.com/random/animal;";
+        url = "https://random-word-form.herokuapp.com/random/animal";
         setCategory('animals');
         break;
     }
